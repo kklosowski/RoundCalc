@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.eter.roundcalc.MainActivity"
+    tools:deviceIds="wear_round">
+
+    <android.support.wearable.view.CircledImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/calc_grid"
+        android:background="@drawable/calc_grid"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="92dp"
+        android:layout_height="72dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:id="@+id/mainLinearLayout"
+        android:divider="?android:dividerHorizontal">
+
+            <TextView
+                android:layout_width="92dp"
+                android:layout_height="24dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:id="@+id/varOneTextView"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:ellipsize="start"
+                android:gravity="center_vertical|right"
+                android:textAlignment="gravity"
+                android:background="@color/ambient_mode_text" />
+
+
+            <LinearLayout
+                android:layout_width="92dp"
+                android:layout_height="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/operatorTextView"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:maxLength="1"/>
+
+                <TextView
+                    android:layout_width="68dp"
+                    android:layout_height="24dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/varTwoTextView"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ellipsize="start"
+                    android:gravity="center_vertical|right"
+                    android:textAlignment="gravity"
+                    android:background="@color/ambient_mode_text" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+
+            <TextView
+                android:layout_width="92dp"
+                android:layout_height="24dp"
+                android:textSize="16sp"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textAlignment="gravity"
+                android:id="@+id/resultTextView"
+                android:maxLines="1"
+                android:background="@color/ambient_mode_text"
+                android:gravity="center" />
+    </LinearLayout>
+
+
+</RelativeLayout>
