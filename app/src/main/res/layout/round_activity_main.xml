@@ -4,13 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.eter.roundcalc.MainActivity"
-    tools:deviceIds="wear_round">
+    tools:deviceIds="wear_round"
+
+    android:background="?android:selectableItemBackgroundBorderless"
+    android:clickable="true"
+    >
 
     <android.support.wearable.view.CircledImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/calc_grid"
-        android:background="@drawable/calc_grid"
+        android:src="@drawable/calc_grid_1600x1600"
+        android:background="@drawable/lb500_lb100_640x640"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:clickable="true" />
@@ -36,7 +41,7 @@
                 android:ellipsize="start"
                 android:gravity="center_vertical|right"
                 android:textAlignment="gravity"
-                android:background="@color/ambient_mode_text" />
+                android:background="#00000000"/>
 
 
             <LinearLayout
@@ -50,6 +55,7 @@
                     android:id="@+id/operatorTextView"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    android:background="#00000000"
                     android:maxLength="1"/>
 
                 <TextView
@@ -63,7 +69,7 @@
                     android:ellipsize="start"
                     android:gravity="center_vertical|right"
                     android:textAlignment="gravity"
-                    android:background="@color/ambient_mode_text" />
+                    android:background="#00000000"/>
 
             </LinearLayout>
 
@@ -82,8 +88,8 @@
                 android:textAlignment="gravity"
                 android:id="@+id/resultTextView"
                 android:maxLines="1"
-                android:background="@color/ambient_mode_text"
-                android:gravity="center" />
+                android:background="#00000000"
+                android:gravity="right" />
     </LinearLayout>
 
 
