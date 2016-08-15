@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.CircledImageView;
 import android.support.wearable.view.WatchViewStub;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import com.udojava.evalex.Expression;
 
 public class MainActivity extends WearableActivity {
 
-    private TextView mTextView;
+
     private Bitmap calcMaskBitmap;
     private CircledImageView calcGridImageView;
     private TextView varOneTextView, varTwoTextView, operatorTextView, resultTextView;
@@ -31,7 +30,6 @@ public class MainActivity extends WearableActivity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.text);
 
 
                 varOneTextView = (TextView) findViewById(R.id.varOneTextView);
@@ -119,7 +117,7 @@ public class MainActivity extends WearableActivity {
                                         break;
 
                                     case 0xffff0000:
-                                        cPressed = '/';
+                                        cPressed = '÷';
                                         break;
 
                                     case 0xff0000ff:
@@ -132,15 +130,11 @@ public class MainActivity extends WearableActivity {
                                 }
                                 //</editor-fold>
 
-                                Log.v("xx", sVarOne);
-                                Log.v("xx", sOperator);
-                                Log.v("xx", sVarTwo);
-
                                 switch (cPressed)
                                 {
                                     case '+':
                                     case '-':
-                                    case '/':
+                                    case '÷':
                                     case '*':{
                                         if(!sVarOne.isEmpty() && sVarTwo.isEmpty()) sOperator = Character.toString(cPressed);
                                         else if(!sVarOne.isEmpty() && !sVarTwo.isEmpty() && !sOperator.isEmpty()){
@@ -148,36 +142,44 @@ public class MainActivity extends WearableActivity {
                                             sVarTwo = "";
                                             sOperator = Character.toString(cPressed);
                                         }
-
-                                    }
-                                    case 'c':
-                                        erase();
                                         break;
-                                    case '=':
-                                        if(!sVarOne.isEmpty() && !sVarTwo.isEmpty() && !sOperator.isEmpty()){
+                                    }
+                                    case 'c':{
+                                        if(!sVarTwo.isEmpty()) sVarTwo = removeLastChar(sVarTwo);
+                                        else if(!sOperator.isEmpty()) sOperator = "";
+                                        else if(!sVarOne.isEmpty()) sVarOne = removeLastChar(sVarOne);
+
+                                        break;
+                                    }
+                                    case '=': {
+                                        if (!sVarOne.isEmpty() && !sVarTwo.isEmpty() && !sOperator.isEmpty()) {
                                             sVarOne = calculate(sVarOne, sVarTwo, sOperator);
                                             sVarTwo = "";
                                             sOperator = "";
                                         }
                                         break;
+                                    }
                                     case 'e':
                                         break;
-                                    default:
-                                        if(sOperator.isEmpty()){
-                                            if(sVarOne.isEmpty() && cPressed !='0') sVarOne += cPressed;
-                                            else if(sVarOne.length() == 1 && sVarOne.charAt(0) == '0') sVarOne = Character.toString(cPressed);
+                                    default: {
+                                        if (sOperator.isEmpty()) {
+                                            if (sVarOne.isEmpty() && cPressed != '0')
+                                                sVarOne += cPressed;
+                                            else if (sVarOne.length() == 1 && sVarOne.charAt(0) == '0')
+                                                sVarOne = Character.toString(cPressed);
                                             else sVarOne += cPressed;
-                                        }
-                                        else {
-                                            if(sVarTwo.length() == 1 && cPressed !='0') sVarTwo += cPressed;
-                                            else if(!sVarTwo.isEmpty() && sVarTwo.charAt(0) == '0') sVarTwo = Character.toString(cPressed);
+                                        } else {
+                                            if (sVarTwo.isEmpty()) sVarTwo += cPressed;
+                                            else if (!sVarTwo.isEmpty() && sVarTwo.charAt(0) == '0')
+                                                sVarTwo = Character.toString(cPressed);
                                             else sVarTwo += cPressed;
                                         }
                                         break;
+                                    }
                                 }
 
                                 if(!sVarOne.isEmpty() && !sVarTwo.isEmpty() && !sOperator.isEmpty()) sResult = calculate(sVarOne, sVarTwo, sOperator);
-                                else sResult = sVarOne;
+                                else sResult = "";
 
                                 varOneTextView.setText(sVarOne);
                                 varTwoTextView.setText(sVarTwo);
@@ -205,6 +207,9 @@ public class MainActivity extends WearableActivity {
     }
 
     private String calculate(String varOne, String varTwo, String operator){
+
+        if(operator.charAt(0) == '÷') operator = "/";
+
         String sExpression = (varOne + operator + varTwo);
         if(operator.charAt(0) == '/' && varTwo.charAt(0) == '0') {
             Toast.makeText(MainActivity.this, "Never divide by 0!", Toast.LENGTH_SHORT).show();
@@ -212,25 +217,10 @@ public class MainActivity extends WearableActivity {
         }
 
         Expression expression = new Expression(sExpression);
-        expression.setPrecision(8);
+        expression.setPrecision(6);
         return expression.eval().toPlainString();
     }
 
-    private void erase(){
-        String sVarOne = varOneTextView.getText().toString();
-        String sVarTwo = varTwoTextView.getText().toString();
-        String sOperator = operatorTextView.getText().toString();
-
-        if(!sVarTwo.isEmpty()) varTwoTextView.setText(removeLastChar(sVarTwo));
-        else if(!sOperator.isEmpty()) operatorTextView.setText("");
-        else if(!sVarOne.isEmpty()) varOneTextView.setText(removeLastChar(sVarOne));
-
-
-        Log.v("zz", varTwoTextView.getText().toString());
-        varOneTextView.invalidate();
-        varTwoTextView.invalidate();
-        operatorTextView.invalidate();
-    }
 
     private static String removeLastChar(String str) {
         return str.substring(0,str.length()-1);
