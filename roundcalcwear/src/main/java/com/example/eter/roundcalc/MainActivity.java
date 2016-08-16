@@ -1,5 +1,7 @@
 package com.example.eter.roundcalc;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -40,6 +42,33 @@ public class MainActivity extends WearableActivity {
                 calcMaskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.calc_mask);
                 calcGridImageView = (CircledImageView) findViewById(R.id.calc_grid);
 
+
+                SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                int iColorPrimary = sharedPref.getInt(getString(R.string.sharedPreferenceKey3), 1);
+
+                switch (iColorPrimary) {
+
+                    case 1:{
+                        calcGridImageView.setBackground(getDrawable(R.drawable.lb500_lb100_640x640));
+                        calcGridImageView.setImageResource(R.drawable.calc_grid_1600x1600);
+                        break;
+                    }
+                    case 2:{
+                        calcGridImageView.setBackground(getDrawable(R.drawable.dp500_dp75_640x640));
+                        calcGridImageView.setImageResource(R.drawable.calc_grid_1600_1600_w);
+                        break;
+                    }
+                    case 3:{
+                        calcGridImageView.setBackground(getDrawable(R.drawable.r500_r75_640x640));
+                        calcGridImageView.setImageResource(R.drawable.calc_grid_1600_1600_w);
+                    }
+                    case 4:{
+                        calcGridImageView.setBackground(getDrawable(R.drawable.g500_g75_640x640));
+                        calcGridImageView.setImageResource(R.drawable.calc_grid_1600x1600);
+                    }
+                }
+
+                calcGridImageView.invalidate();
 
 
                 calcGridImageView.setOnTouchListener(new View.OnTouchListener() {
