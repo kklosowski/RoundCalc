@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements
                 .addApi(Wearable.API)
                 .build();
 
+        mGoogleApiClient.connect();
+
 
         RelativeLayout backgroundRelativeLayout = (RelativeLayout) findViewById(R.id.backgroundRelativeLayout);
 
