@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kklosowski.eter.roundcalc.MainActivity"
+    tools:deviceIds="wear_square">
+
+    <android.support.wearable.view.CircledImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/calc_grid"
+        android:src="@drawable/calc_grid_1600x1600"
+        android:background="@drawable/lb500_lb100_640x640"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:id="@+id/mainLinearLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:id="@+id/varOneTextView"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="start"
+            android:includeFontPadding="false"
+            android:gravity="right|top"
+            android:textAlignment="gravity"
+            android:background="#00000000" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:padding="0dp"
+            android:layout_margin="0dp">
+
+            <TextView
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:id="@+id/operatorTextView"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="#00000000"
+                android:gravity="right|top"
+                android:textAlignment="gravity"
+                android:maxLength="1"/>
+
+            <TextView
+                android:layout_width="64dp"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:id="@+id/varTwoTextView"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:ellipsize="start"
+                android:gravity="right|top"
+                android:textAlignment="gravity"
+                android:includeFontPadding="false"
+                android:background="#00000000" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            android:background="@color/light_grey"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="right|top"
+            android:textAlignment="gravity"
+            android:id="@+id/resultTextView"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:background="#00000000" />
+    </LinearLayout>
+
+</RelativeLayout>

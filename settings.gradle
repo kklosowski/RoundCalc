@@ -1,1 +1,1 @@
-include ':roundcalcwear', ':roundcalcphone'
+include ':wear', ':roundcalc'

@@ -9,15 +9,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/roundcalcphone" />
-            <option value="$PROJECT_DIR$/roundcalcwear" />
+            <option value="$PROJECT_DIR$/roundcalc" />
+            <option value="$PROJECT_DIR$/wear" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/roundcalcphone" />
-            <option value="$PROJECT_DIR$/roundcalcwear" />
+            <option value="$PROJECT_DIR$/roundcalc" />
+            <option value="$PROJECT_DIR$/wear" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RoundCalc.iml" filepath="$PROJECT_DIR$/RoundCalc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/roundcalcphone/roundcalcphone.iml" filepath="$PROJECT_DIR$/roundcalcphone/roundcalcphone.iml" />
-      <module fileurl="file://$PROJECT_DIR$/roundcalcwear/app.iml" filepath="$PROJECT_DIR$/roundcalcwear/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/roundcalc/roundcalc.iml" filepath="$PROJECT_DIR$/roundcalc/roundcalc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
     </modules>
   </component>
 </project>

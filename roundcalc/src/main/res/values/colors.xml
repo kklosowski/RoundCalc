@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="dp500">#673AB7</color>
+    <color name="g500">#4CAF50</color>
+    <color name="lb500">#03A9F4</color>
+    <color name="r500">#F44336</color>
+    <color name="dp75">#DFD5EF</color>
+    <color name="g75">#D8EDD9</color>
+    <color name="lb100">#B3E5FC</color>
+    <color name="r75">#FFDCE0</color>
+</resources>
