@@ -2,5 +2,5 @@
     <string name="app_name">RoundCalc</string>
     <string name="sharedPreferenceKey1">roundcalcColorPrimaryPreferenceKey</string>
     <string name="sharedPreferenceKey2">roundcalcColorSecondaryPreferenceKey</string>
-    <string name="sharedPreferenceKey3">roundcalcWearBackgroundIDPreferenceKey</string>
+    <string name="sharedPreferenceKey3">roundcalcWearStyleIDPreferenceKey</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.kklosowski.eter.roundcalc;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ public class MainActivity extends WearableActivity implements
     private Bitmap calcMaskBitmap;
     private CircledImageView calcGridImageView;
     private TextView varOneTextView, varTwoTextView, operatorTextView, resultTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +65,9 @@ public class MainActivity extends WearableActivity implements
                 calcMaskBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.calc_mask);
                 calcGridImageView = (CircledImageView) findViewById(R.id.calc_grid);
 
-                int styleID = 3;
+                SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                int styleID = sharedPref.getInt(getString(R.string.sharedPreferenceKey3), 1);
+
                 changeColor(styleID);
 
                 calcGridImageView.setOnTouchListener(new View.OnTouchListener() {
@@ -77,83 +82,11 @@ public class MainActivity extends WearableActivity implements
                         Character cPressed;
 
 
+                        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
 
-                        switch (motionEvent.getAction()) {
-                            case MotionEvent.ACTION_DOWN: {
+                                cPressed = detectPressedKey(Integer.valueOf(String.valueOf(color)));
 
-                                //<editor-fold desc="ColorSwitch">
-                                switch (Integer.valueOf(String.valueOf(color))) {
-
-                                    case 0xffeeeeee:
-                                        cPressed = '1';
-                                        break;
-
-                                    case 0xffdddddd:
-                                        cPressed = '2';
-                                        break;
-
-                                    case 0xffcccccc:
-                                        cPressed = '3';
-                                        break;
-
-                                    case 0xffbbbbbb:
-                                        cPressed = '4';
-                                        break;
-
-                                    case 0xffaaaaaa:
-                                        cPressed = '5';
-                                        break;
-
-                                    case 0xff999999:
-                                        cPressed = '6';
-                                        break;
-
-                                    case 0xff888888:
-                                        cPressed = '7';
-                                        break;
-
-                                    case 0xff777777:
-                                        cPressed = '8';
-                                        break;
-
-                                    case 0xff666666:
-                                        cPressed = '9';
-                                        break;
-
-                                    case 0xff555555:
-                                        cPressed = '0';
-                                        break;
-
-                                    case 0xff00ff00:
-                                        cPressed = 'c';
-                                        break;
-
-                                    case 0xff00ffff:
-                                        cPressed = '+';
-                                        break;
-
-                                    case 0xffff00ff:
-                                        cPressed = '-';
-                                        break;
-
-                                    case 0xffffff00:
-                                        cPressed = '*';
-                                        break;
-
-                                    case 0xffff0000:
-                                        cPressed = '÷';
-                                        break;
-
-                                    case 0xff0000ff:
-                                        cPressed = '=';
-                                        break;
-
-                                    default:
-                                        cPressed = 'e';
-                                        break;
-                                }
-                                //</editor-fold>
-
+                                //<editor-fold desc="ActionSwitch">
                                 switch (cPressed)
                                 {
                                     case '+':
@@ -201,6 +134,7 @@ public class MainActivity extends WearableActivity implements
                                         break;
                                     }
                                 }
+                            //</editor-fold>
 
                                 if(!sVarOne.isEmpty() && !sVarTwo.isEmpty() && !sOperator.isEmpty()) sResult = calculate(sVarOne, sVarTwo, sOperator);
                                 else sResult = "";
@@ -212,10 +146,7 @@ public class MainActivity extends WearableActivity implements
 
                                 findViewById(R.id.mainLinearLayout).invalidate();
 
-                                break;
-                            }
                         }
-
                         return false;
                     }
                 });
@@ -223,6 +154,85 @@ public class MainActivity extends WearableActivity implements
             }
         });
 
+    }
+
+
+    private char detectPressedKey(int iColorValue){
+
+        char cPressed;
+
+        switch (iColorValue) {
+
+            case 0xffeeeeee:
+                cPressed = '1';
+                break;
+
+            case 0xffdddddd:
+                cPressed = '2';
+                break;
+
+            case 0xffcccccc:
+                cPressed = '3';
+                break;
+
+            case 0xffbbbbbb:
+                cPressed = '4';
+                break;
+
+            case 0xffaaaaaa:
+                cPressed = '5';
+                break;
+
+            case 0xff999999:
+                cPressed = '6';
+                break;
+
+            case 0xff888888:
+                cPressed = '7';
+                break;
+
+            case 0xff777777:
+                cPressed = '8';
+                break;
+
+            case 0xff666666:
+                cPressed = '9';
+                break;
+
+            case 0xff555555:
+                cPressed = '0';
+                break;
+
+            case 0xff00ff00:
+                cPressed = 'c';
+                break;
+
+            case 0xff00ffff:
+                cPressed = '+';
+                break;
+
+            case 0xffff00ff:
+                cPressed = '-';
+                break;
+
+            case 0xffffff00:
+                cPressed = '*';
+                break;
+
+            case 0xffff0000:
+                cPressed = '÷';
+                break;
+
+            case 0xff0000ff:
+                cPressed = '=';
+                break;
+
+            default:
+                cPressed = 'e';
+                break;
+        }
+
+        return cPressed;
     }
 
 
@@ -309,7 +319,14 @@ public class MainActivity extends WearableActivity implements
                 DataItem item = event.getDataItem();
                 if (item.getUri().getPath().compareTo("/styleID") == 0) {
                     DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
-                    changeColor(dataMap.getInt("styleID"));
+                    int styleID = dataMap.getInt("styleID");
+                    changeColor(styleID);
+
+                    SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putInt(getString(R.string.sharedPreferenceKey3), styleID);
+                    editor.commit();
+
                 }
             } else if (event.getType() == DataEvent.TYPE_DELETED) {
                 // DataItem deleted

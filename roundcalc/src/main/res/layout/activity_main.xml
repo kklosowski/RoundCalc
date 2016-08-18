@@ -19,19 +19,31 @@
         android:textAlignment="gravity"
         android:textSize="36sp"
         android:maxLines="1"
-        android:padding="14dp"
-        android:id="@+id/textView"
+        android:paddingTop="14dp"
+        android:id="@+id/mainTextView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="(Wear app must be open to change color)"
+        android:layout_below="@id/mainTextView"
+        android:id="@+id/hintTextView"
+        android:maxLines="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:textAlignment="gravity"
+        android:paddingBottom="20dp"/>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textView" >
+        android:layout_below="@id/hintTextView" >
 
         <ImageButton
             android:layout_width="160dp"

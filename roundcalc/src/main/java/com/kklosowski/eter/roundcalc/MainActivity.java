@@ -8,14 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.wearable.DataApi;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -120,8 +118,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportActionBar().setBackgroundDrawable(colorBar);
         backgroundRelativeLayout.setBackgroundColor(colorBackground);
 
-        //Toast.makeText(MainActivity.this, "Changes will be visible after restarting wear app.", Toast.LENGTH_SHORT).show();
-
         backgroundRelativeLayout.invalidate();
     }
 
@@ -130,13 +126,10 @@ public class MainActivity extends AppCompatActivity implements
         putDataMapReq.getDataMap().putInt("styleID", styleID);
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest().setUrgent();
 
-        Toast.makeText(MainActivity.this, "changeStyle()", Toast.LENGTH_SHORT).show();
-        
         Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq)
                 .setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
                     @Override
                     public void onResult(@NonNull DataApi.DataItemResult dataItemResult) {
-                        Log.v("x", "onResult");
                         if(!dataItemResult.getStatus().isSuccess()){
                             Toast.makeText(MainActivity.this, "Failed to change color.", Toast.LENGTH_SHORT).show();
                         }
@@ -146,8 +139,8 @@ public class MainActivity extends AppCompatActivity implements
                     }
                 });
 
-        PendingResult<DataApi.DataItemResult> pendingResult =
-                Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
+//        PendingResult<DataApi.DataItemResult> pendingResult =
+//                Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
     }
 
     @Override
