@@ -37,7 +37,7 @@
                 android:ellipsize="start"
                 android:gravity="bottom|right"
                 android:textAlignment="gravity"
-                android:background="#00000000"/>
+                android:background="#00000000" />
 
 
             <LinearLayout
@@ -52,7 +52,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:background="#00000000"
-                    android:maxLength="1"/>
+                    android:maxLength="1" />
 
                 <TextView
                     android:layout_width="76dp"
@@ -65,7 +65,7 @@
                     android:ellipsize="start"
                     android:gravity="top|right"
                     android:textAlignment="gravity"
-                    android:background="#00000000"/>
+                    android:background="#00000000" />
 
             </LinearLayout>
 
